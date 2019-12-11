@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Minimization Service</title>
+</head>
+  <body>
+    <h1>Data Minimization Service</h1>
+
+    <p>This service provides a simple mechanism for minimizing and anonymizing different types of data. It may be used
+    programmatically via the REST API, or directly through this minimalistic web interface.</p>
+
+    <form>
+        <input type="text" name="input" value="{{ .Input }}">
+        <select name="type">
+            <option value="" selected disabled hidden>Data Type</option>
+        {{ range $key := .SupportedTypes }}
+            <option value="{{ $key }}">{{ $key }}</option>
+        {{ end }}
+        </select>
+        <select name="level">
+            <option value="" selected disabled hidden>Minimization Level</option>
+            {{ range $key := .SupportedLevels }}
+                <option value="{{ $key }}">{{ $key }}</option>
+            {{ end }}
+        </select>
+        <input type="submit" value="Submit">
+        <br><br>
+        {{ .Result }}
+    </form>
+  </body>
+</html>
