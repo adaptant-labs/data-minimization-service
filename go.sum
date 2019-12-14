@@ -2,6 +2,8 @@ github.com/adaptant-labs/go-minimizer v0.0.0-20191209144935-f9f287e96c36 h1:IjnI
 github.com/adaptant-labs/go-minimizer v0.0.0-20191209144935-f9f287e96c36/go.mod h1:EwtMnDmEFROUEc6Vk8bCPBkBQH5o810SReVJfIv+bUc=
 github.com/adaptant-labs/go-minimizer v0.0.0-20191210151559-b7276273e483 h1:xR/sK6Iog0yBF9ppxJW/HALpHcGJ1sQVfoXIVK3bOtM=
 github.com/adaptant-labs/go-minimizer v0.0.0-20191210151559-b7276273e483/go.mod h1:EwtMnDmEFROUEc6Vk8bCPBkBQH5o810SReVJfIv+bUc=
+github.com/adaptant-labs/go-minimizer v0.0.0-20191214215008-26c6ba7270d7 h1:68A1dlTApDb/ehWTeBGTciMQ7/8zWPHhNmSSD97OzDs=
+github.com/adaptant-labs/go-minimizer v0.0.0-20191214215008-26c6ba7270d7/go.mod h1:EwtMnDmEFROUEc6Vk8bCPBkBQH5o810SReVJfIv+bUc=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=

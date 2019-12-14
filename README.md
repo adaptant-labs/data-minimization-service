@@ -14,8 +14,12 @@ minimization to apply. These are written to the `/data` endpoint. The treated da
 result output.
 
 The `type` here refers to the matching data type in [go-minimizer], such as name, email, etc. and is always a named
-string. `level` similarly matches the `go-minimizer` minimization levels as a string representation. If `anonymize` is
-specified, the `input` data may be omitted.
+string. `level` similarly matches the `go-minimizer` minimization levels as a string representation. There are a number
+of exceptions to the required inputs based on the minimization level:
+
+- If `anonymize` is specified, the `input` data may be omitted.
+- If `tokenize` is specified, the `input` and `type` can be omitted.
+- If `mask` is specified, input is required, but `type` can be omitted. A mask pattern may also be specified via `pattern`.
 
 Input schema:
 
@@ -23,7 +27,8 @@ Input schema:
 { 
   "input": <input data>,
   "type": "string",
-  "level": "fine" | "coarse" | "anonymize"
+  "level": "fine" | "coarse" | "anonymize" | "tokenize" | "mask",
+  "pattern": <optional mask pattern>
 }
 ```
 

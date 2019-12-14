@@ -17,9 +17,10 @@ var (
 )
 
 type DataMinimizationRequest struct {
-	Input interface{}                  `json:"input,omitempty"`
-	Type  string                       `json:"type"`
-	Level minimizers.MinimizationLevel `json:"level"`
+	Input   interface{}                  `json:"input,omitempty"`
+	Type    string                       `json:"type,omitempty"`
+	Level   minimizers.MinimizationLevel `json:"level"`
+	Pattern string                       `json:"pattern,omitempty"`
 }
 
 type DataMinimizationResponse struct {
@@ -28,23 +29,40 @@ type DataMinimizationResponse struct {
 
 func dataInputHandler(w http.ResponseWriter, r *http.Request) {
 	var min DataMinimizationRequest
+	var response DataMinimizationResponse
 
+	handled := false
 	d := json.NewDecoder(r.Body)
 	err := d.Decode(&min)
 	if err != nil {
-		panic(err)
+		http.Error(w, "invalid JSON input provided", http.StatusBadRequest)
+		return
 	}
 
-	handler := minimizers.TagMap[min.Type]
-	if handler != nil {
-		var response DataMinimizationResponse
+	if min.Level == minimizers.MinimizationTokenize {
+		response.Result, _ = minimizers.Tokenize()
+		handled = true
+	} else if min.Level == minimizers.MinimizationMask {
+		if min.Pattern != "" {
+			response.Result, _ = minimizers.MaskWithPattern(min.Input.(string), rune(min.Pattern[0]))
+		} else {
+			response.Result, _ = minimizers.Mask(min.Input.(string))
+		}
+		handled = true
+	} else {
+		handler := minimizers.TagMap[min.Type]
+		if handler != nil {
+			response.Result = handler(min.Level, min.Input)
+			handled = true
+		}
+	}
 
+	if handled {
 		processRequestMetrics(min.Level)
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		response.Result = handler(min.Level, min.Input)
 		json.NewEncoder(w).Encode(response)
 	} else {
 		http.Error(w, "no matching handler found", http.StatusNotFound)
